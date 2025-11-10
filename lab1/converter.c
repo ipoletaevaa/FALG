@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-ConverterStatus decimal_to_base_2r(int number, int r, char** result, double epsilon){
+ConverterStatus decimal_to_base(int number, int r, char** result){
     if (result == NULL){
         return CONVERT_ERROR_NULL_PTR;
     }
@@ -37,7 +37,7 @@ ConverterStatus decimal_to_base_2r(int number, int r, char** result, double epsi
     int index = 63;
     buffer[index] = '\0';
 
-    while (n > 0){
+    while (n > 0 && index > 0){
         index--;
         unsigned int digit = n & mask;
 
@@ -50,7 +50,7 @@ ConverterStatus decimal_to_base_2r(int number, int r, char** result, double epsi
 
     n = n >> r;
 
-    if (is_negative){
+    if (is_negative && index > 0){
         index--;
         buffer[index] = '-';
     }
@@ -66,5 +66,6 @@ ConverterStatus decimal_to_base_2r(int number, int r, char** result, double epsi
         *dst++ = *src++;
     }
 
+    *result = result_str;
+    return CONVERT_SUCCESS;
 }
-
