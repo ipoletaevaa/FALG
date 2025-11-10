@@ -33,5 +33,38 @@ ConverterStatus decimal_to_base_2r(int number, int r, char** result, double epsi
         n = (unsigned int)number;
     }
 
+    char buffer[64];
+    int index = 63;
+    buffer[index] = '\0';
+
+    while (n > 0){
+        index--;
+        unsigned int digit = n & mask;
+
+        if (digit < 10){
+            buffer[index] = '0' + digit;
+        }else{
+            buffer[index] = 'A' + (digit - 10);
+        }
+    }
+
+    n = n >> r;
+
+    if (is_negative){
+        index--;
+        buffer[index] = '-';
+    }
+
+    char* result_str = (char*)malloc(64 - index);
+    if (result_str == NULL){
+        return CONVERT_ERROR_ALLOCATION;
+    }
+    
+    char* src = &buffer[index];
+    char* dst = result_str;
+    while (*src){
+        *dst++ = *src++;
+    }
+
 }
 
