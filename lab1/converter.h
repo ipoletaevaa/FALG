@@ -10,6 +10,6 @@ typedef enum {
     CONVERT_ERROR_ALLOCATION
 } ConverterStatus;
 
-ConverterStatus decimal_to_base(int number, int r, char** result);
+ConverterStatus decimal_to_base_2r(int number, int r, char** result);
 
 #endif
