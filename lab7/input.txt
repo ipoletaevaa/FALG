@@ -1,0 +1,8 @@
+A = 2
+B = 3
+C = A + B * 2
+print(C)
+D = (A + B) * 2
+print(D)
+E = A ^ B * 2
+print(E)

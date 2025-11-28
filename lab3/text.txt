@@ -1,0 +1,2 @@
+1 Ivanov Ivan Ivanovich 15 5 1990 M 50000.0
+2 Petrova Maria Sergeevna 20 8 1985 W 60000.0

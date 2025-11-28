@@ -124,15 +124,20 @@ void delete_liver_interactive(LinkedList* list, UndoManager* undo_manager) {
     }
     
     Liver* liver_copy;
-    if (copy_liver(liver_to_delete, &liver_copy) == LIVER_SUCCESS) {
+    LiverStatus copy_status = copy_liver(liver_to_delete, &liver_copy);
+    
+    if (copy_status == LIVER_SUCCESS) {
         LIST_TYPE result;
-        if (delete_at_list(list, index, &result) == LIST_SUCCESS) {
+        ListStatus delete_status = delete_at_list(list, index, &result);
+        
+        if (delete_status == LIST_SUCCESS) {
             if (undo_manager) {
                 record_action(undo_manager, ACTION_DELETE, liver_copy, NULL, index);
+                printf("Житель успешно удален!\n");
             } else {
                 destroy_liver(liver_copy);
+                printf("Житель успешно удален!\n");
             }
-            printf("Житель успешно удален!\n");
         } else {
             destroy_liver(liver_copy);
             printf("Ошибка удаления жителя!\n");
